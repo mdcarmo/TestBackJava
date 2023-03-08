@@ -1,6 +1,12 @@
-﻿namespace ExpenseManagement.Core.Entities
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using System;
+using System.Text.Json.Serialization;
+
+namespace ExpenseManagement.Core.Entities
 {
-    public  class Spent: EntityBase
+    public  class Spent
     {
         /// <summary>
         /// 
@@ -19,6 +25,13 @@
             Category = category;
         }
 
+
+        [BsonId]
+        //[BsonRepresentation(BsonType.String)]
+        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonProperty("id")]
+        //public Guid Id { get; set; }
+        public string Id { get; set; }
         public long CodeUser { get; private set; }
         public string? Description { get; private set; }
         public double Value { get; private set; }

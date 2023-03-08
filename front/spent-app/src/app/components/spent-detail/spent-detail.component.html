@@ -1,0 +1,98 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentSpent.id">
+    <h4>Gasto</h4>
+    <div>
+      <label><strong>Data:</strong></label>
+      {{ currentSpent.postedAt | date : "dd/MM/yyyy HH:mm" }}
+    </div>
+    <div>
+      <label><strong>Descrição:</strong></label> {{ currentSpent.description }}
+    </div>
+    <div>
+      <label><strong>Valor:</strong></label>
+      {{ currentSpent.value | number : "1.2-2" }}
+    </div>
+    <div>
+      <label><strong>Categoria:</strong></label> {{ currentSpent.category }}
+    </div>
+    <div>
+      <label><strong>Outras informações do gasto...</strong></label>
+    </div>
+    <a
+      class="btn btn-primary mr-1 mt-3"
+      routerLink="/spentdetail/{{ currentSpent.id }}"
+    >
+      Editar
+    </a>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div class="row g-5">
+    <div class="col-md-9">
+      <div *ngIf="currentSpent.id" class="edit-form col-md-8">
+        <h4>Gasto</h4>
+        <form>
+          <div class="form-group">
+            <label for="title">Data do gasto</label>
+            <input
+              type="text"
+              class="form-control"
+              id="postedAt"
+              [(ngModel)]="currentSpent.postedAt"
+              name="postedAt"
+              disabled="true"
+            />
+          </div>
+          <div class="form-group mt-1">
+            <label for="description">Descrição</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              [(ngModel)]="currentSpent.description"
+              name="description"
+              disabled="true"
+            />
+          </div>
+          <div class="form-group mt-1">
+            <label for="description">Valor</label>
+            <input
+              type="text"
+              class="form-control"
+              id="value"
+              [(ngModel)]="currentSpent.value"
+              name="value"
+              disabled="true"
+            />
+          </div>
+          <div class="form-group mt-1">
+            <label for="description">Categoria</label>
+            <input
+              type="text"
+              class="form-control"
+              id="category"
+              [(ngModel)]="currentSpent.category"
+              name="category"
+            />
+          </div>
+        </form>
+        <div class="alert alert-success mt-2" role="alert" *ngIf="message">
+          {{ message }}
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2" (click)="update()">
+          Alterar
+        </button>
+        &nbsp;
+        <button
+          type="button"
+          class="btn btn-primary mt-2"
+          (click)="goBackToPrevPage()"
+        >
+          Voltar
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

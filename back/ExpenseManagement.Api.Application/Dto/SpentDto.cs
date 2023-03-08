@@ -21,6 +21,9 @@ namespace ExpenseManagement.Api.Application.Dto
             PostedAt = postedAt;
             Category = category;
         }
+
+        //public Guid Id { get; set; }
+        public string Id { get; set; }
         public long CodeUser { get; private set; }
 
         [Required(ErrorMessage = "Descricao é obrigatoria.")]
@@ -37,13 +40,16 @@ namespace ExpenseManagement.Api.Application.Dto
         /// <returns>SpentDto</returns>
         public static SpentDto FromEntity(Spent entity)
         {
-            return new SpentDto(
+            SpentDto dto =  new SpentDto(
                 entity.CodeUser,
                 entity.Description,
                 entity.Value,
                 entity.PostedAt,
                 entity.Category
              );
+
+            dto.Id = entity.Id;
+            return dto;
         }
 
         /// <summary>
@@ -61,7 +67,5 @@ namespace ExpenseManagement.Api.Application.Dto
                 dto.Category
              );
         }
-
-
     }
 }

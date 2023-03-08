@@ -1,0 +1,27 @@
+<div class="row g-5">
+  <div class="col-md-6">
+    <h2>Login</h2>
+    <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
+      <div class="form-group mb-3">
+        <label>Email</label>
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Enter email"
+          required
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Password"
+        />
+      </div>
+      <button type="submit" class="btn btn-block btn-primary">Acessar</button>
+    </form>
+  </div>
+</div>

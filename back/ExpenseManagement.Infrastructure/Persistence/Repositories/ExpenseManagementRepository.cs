@@ -26,10 +26,25 @@ namespace ExpenseManagement.Infrastructure.Persistence.Repositories
         }
 
         /// <inheritdoc />
+        public async Task<bool> UpdateAsync(string id, Spent spent)
+        {
+            ReplaceOneResult result = await _collection.ReplaceOneAsync(x => x.Id == id, spent);
+            return result.ModifiedCount > 0;
+        }
+
+        /// <inheritdoc />
         public async Task<List<Spent>> GetByCodeAsync(long codeUser)
         {
             return await _collection.Find(c => c.CodeUser == codeUser).ToListAsync();
-        }   
+        }
+
+        /// <inheritdoc />
+        public async Task<Spent> GetByIdAsync(string id)
+        {
+            var objectId = new ObjectId(id);
+
+            return await _collection.Find($"{{ _id: ObjectId('{objectId}') }}").SingleAsync();
+        }
 
         /// <inheritdoc />
         public async Task<List<Spent>> GetByCodeAndDateAsync(long codeUser, DateTime dateFind)

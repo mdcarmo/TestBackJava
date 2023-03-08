@@ -15,7 +15,7 @@ namespace ExpenseManagement.Authentication.Api.Controllers
         public async Task<ActionResult<dynamic>> Authenticate([FromBody] UserDto dto)
         {
             // Recupera o usuário
-            var user = UserRepository.Get(dto.Username, dto.Password);
+            var user = UserRepository.Get(dto.Email, dto.Password);
 
             // Verifica se o usuário existe
             if (user == null)

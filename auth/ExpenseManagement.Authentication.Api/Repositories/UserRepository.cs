@@ -4,12 +4,12 @@ namespace ExpenseManagement.Authentication.Api.Repositories
 {
     public class UserRepository
     {
-        public static User Get(string username, string password)
+        public static User Get(string email, string password)
         {
             var users = new List<User>();
-            users.Add(new User { Id = 1, Username = "EMPRESA XPTO", Password = "123", Role = "system" });
-            users.Add(new User { Id = 1234, Username = "Marcelo", Password = "123", Role = "client" });
-            return users.Where(x => x.Username.ToLower() == username.ToLower() && x.Password == password).FirstOrDefault();
+            users.Add(new User { Id = 1, Email= "empresa-xpto@gmail.com", Username = "EMPRESA XPTO", Password = "123", Role = "system" });
+            users.Add(new User { Id = 1234, Email="marcelo@gmail.com", Username = "Marcelo", Password = "123", Role = "client" });
+            return users.Where(x => x.Email.ToLower() == email.ToLower() && x.Password == password).FirstOrDefault();
         }
     }
 }

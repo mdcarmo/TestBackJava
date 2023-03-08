@@ -1,9 +1,6 @@
 ﻿using ExpenseManagement.Api.Application.Dto;
 using ExpenseManagement.Core.Entities;
 using ExpenseManagement.Core.Repositories;
-using MongoDB.Bson;
-using System.Globalization;
-using System.Runtime.ConstrainedExecution;
 
 namespace ExpenseManagement.Api.Application.Services
 {
@@ -37,12 +34,28 @@ namespace ExpenseManagement.Api.Application.Services
         }
 
         /// <inheritdoc />
+        public async Task<bool> UpdateAsync(string id, SpentDto spent)
+        {
+            var spentFromDb = await _repository.GetByIdAsync(id);
+            spentFromDb.Category = spent.Category;
+
+            return await _repository.UpdateAsync(id, spentFromDb);
+        }
+
+        /// <inheritdoc />
         public async Task<List<SpentDto>> GetByCodeAsync(long codeUser)
         {
             var listSpending = await _repository.GetByCodeAsync(codeUser);
             return MappingListEntitieToListDto(listSpending);
         }
-        
+
+        /// <inheritdoc />
+        public async Task<SpentDto> GetByIdAsync(string id)
+        {
+            var spent = await _repository.GetByIdAsync(id);
+            return SpentDto.FromEntity(spent);
+        }
+
         /// <inheritdoc />
         public async Task<List<SpentDto>> GetByCodeAndDateAsync(long codeUser, DateTime dateFind)
         {

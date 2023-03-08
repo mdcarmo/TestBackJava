@@ -2,6 +2,7 @@
 using ExpenseManagement.Api.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace ExpenseManagement.Api.Controllers
 {
@@ -33,6 +34,19 @@ namespace ExpenseManagement.Api.Controllers
             return Ok(codeSpent);
         }
 
+        [HttpPut]
+        [Route("{id}")]
+        [Authorize(Roles = "client")]
+        public async Task<IActionResult> Update([FromRoute] string id, SpentDto dto)
+        {
+            var updateOK = await _service.UpdateAsync(id, dto);
+
+            if(updateOK)
+                return NoContent();
+
+            return NotFound();
+        }
+
         /// <summary>
         /// Retorna os gastos efetuados no cartão de crédito dado o código do cliente.
         /// </summary>
@@ -40,7 +54,7 @@ namespace ExpenseManagement.Api.Controllers
         /// <returns>Listagem de gastos efetuados no cartão do cliente.</returns>
         [HttpGet("{usercode}")]
         [Authorize(Roles = "client")]
-        public async Task<IActionResult> GetByCode(long usercode)
+        public async Task<IActionResult> GetByCodeAsync(long usercode)
         {
             /*
             Funcionalidade: Listagem de gastos*
@@ -66,9 +80,26 @@ namespace ExpenseManagement.Api.Controllers
         /// </summary>
         /// <param name="usercode">Código do cliente</param>
         /// <returns>Listagem de gastos efetuados no cartão do cliente.</returns>
+        [HttpGet("getById/{id}")]
+        [Authorize(Roles = "client")]
+        public async Task<IActionResult> GetByIdAsync(string id)
+        {
+            var spent = await _service.GetByIdAsync(id);
+
+            if (spent == null)
+                return NotFound();
+
+            return Ok(spent);
+        }
+
+        /// <summary>
+        /// Retorna os gastos efetuados no cartão de crédito dado o código do cliente.
+        /// </summary>
+        /// <param name="usercode">Código do cliente</param>
+        /// <returns>Listagem de gastos efetuados no cartão do cliente.</returns>
         [HttpGet("filterByDate/{usercode}")]
         [Authorize(Roles = "client")]
-        public async Task<IActionResult> GetByCodeAndDateAsync(long usercode, DateTime dateFind)
+        public async Task<IActionResult> GetByCodeAndDateAsync(long usercode, string dateFind)
         {
             /*
             Funcionalidade: Filtro de gastos
@@ -78,7 +109,7 @@ namespace ExpenseManagement.Api.Controllers
             Então gostaria de ver meus gastos apenas deste dia.
             */
 
-            var spents = await _service.GetByCodeAndDateAsync(usercode,dateFind);
+            var spents = await _service.GetByCodeAndDateAsync(usercode, Convert.ToDateTime(dateFind, CultureInfo.InvariantCulture));
 
             if (spents == null)
                 return NotFound();
