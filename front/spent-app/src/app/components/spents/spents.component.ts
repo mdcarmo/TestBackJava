@@ -31,7 +31,6 @@ export class SpentsComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.spents = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });
@@ -53,7 +52,6 @@ export class SpentsComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.spents = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });

@@ -35,12 +35,12 @@ namespace ExpenseManagement.Infrastructure
             services.AddSingleton<IMongoClient>(sp => {
                 var configuration = sp.GetService<IConfiguration>();
                 var options = sp.GetService<MongoDbOptions>();
-
                 var client = new MongoClient(options.ConnectionString);
-                var db = client.GetDatabase(options.Database);
 
-                var dbSeed = new DbSeed(db);
-                dbSeed.Populate();
+                //use para fazer o seed na base de dados
+                //var db = client.GetDatabase(options.Database);
+                //var dbSeed = new DbSeed(db);
+                //dbSeed.Populate();
 
                 return client;
             });
@@ -67,6 +67,7 @@ namespace ExpenseManagement.Infrastructure
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IExpenseManagementRepository, ExpenseManagementRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             return services;
         }
     }

@@ -19,6 +19,7 @@ namespace ExpenseManagement.Api.Application
         private static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IExpenseManagementService, ExpenseManagementService>();
+            services.AddScoped<ICategoryService, CategoryService>();
           
             return services;
         }

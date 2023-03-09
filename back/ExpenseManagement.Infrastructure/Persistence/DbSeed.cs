@@ -6,12 +6,12 @@ namespace ExpenseManagement.Infrastructure.Persistence
     public class DbSeed
     {
         private readonly IMongoCollection<Spent> _collection;
-        
+
         private List<Spent> _spentList = new List<Spent> {
-            new Spent(1234, "Restaurante XPTO", 285, DateTime.Now.Date, "Alimentacao"),
-            new Spent(1234, "Supermercado WWWW", 485, DateTime.Now.Date.AddHours(2), "Despesas Mensais"),
-            new Spent(1234, "Despesa diversa", 485, DateTime.Now.Date.AddHours(3), "Moradia"),
-            new Spent(1234, "Transporte Escolar", 180, DateTime.Now.Date.AddHours(3), "Transporte")
+            new Spent(){ CodeUser=1234, Description="Restaurante XPTO", Value=285, PostedAt=DateTime.Now.Date, Category="Alimentacao" },
+            new Spent(){ CodeUser=1234, Description="Supermercado WWWW", Value=485, PostedAt=DateTime.Now.Date.AddHours(2), Category="Despesas Mensais" },
+            new Spent(){ CodeUser=1234, Description="Despesa diversa", Value=485, PostedAt=DateTime.Now.Date.AddHours(3), Category="Moradia" },
+            new Spent(){ CodeUser=1234, Description="Transporte Escolar", Value=180, PostedAt=DateTime.Now.Date.AddHours(3), Category="Transporte" }
         };
 
         public DbSeed(IMongoDatabase database)

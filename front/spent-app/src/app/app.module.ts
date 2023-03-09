@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpentsComponent } from './components/spents/spents.component';
 import { SpentDetailComponent } from './components/spent-detail/spent-detail.component';
 import { DatePipe } from '@angular/common';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AutocompleteLibModule
   ],
   providers: [
     {

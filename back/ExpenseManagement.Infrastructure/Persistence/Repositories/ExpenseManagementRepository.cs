@@ -3,12 +3,14 @@ using ExpenseManagement.Core.Repositories;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Globalization;
+using System.Linq;
 
 namespace ExpenseManagement.Infrastructure.Persistence.Repositories
 {
     public class ExpenseManagementRepository : IExpenseManagementRepository
     {
         private readonly IMongoCollection<Spent> _collection;
+        private readonly IMongoCollection<Category> _collectionCategory;
 
         /// <summary>
         /// Contrutor
@@ -17,19 +19,45 @@ namespace ExpenseManagement.Infrastructure.Persistence.Repositories
         public ExpenseManagementRepository(IMongoDatabase database)
         {
             _collection = database.GetCollection<Spent>("spending");
+            _collectionCategory = database.GetCollection<Category>("categories");
         }
 
         /// <inheritdoc />
         public async Task AddAsync(Spent spent)
         {
             await _collection.InsertOneAsync(spent);
+            
+            //verifica se a categoria já existe na coleção  
+            await CheckIfCategoryExists(spent);
+        }
+
+        private async Task CheckIfCategoryExists(Spent spent)
+        {
+            if (!string.IsNullOrEmpty(spent.Category))
+            {
+                var categoryDb = await _collectionCategory.Find(c => c.Description.Contains(spent.Category)).FirstOrDefaultAsync();
+                if (categoryDb == null)
+                {
+                    Category category = new Category();
+                    category.Description = spent.Category;
+
+                    await _collectionCategory.InsertOneAsync(category);
+                }
+            }
         }
 
         /// <inheritdoc />
         public async Task<bool> UpdateAsync(string id, Spent spent)
         {
             ReplaceOneResult result = await _collection.ReplaceOneAsync(x => x.Id == id, spent);
-            return result.ModifiedCount > 0;
+            
+            if(result.ModifiedCount > 0)
+            {
+                await CheckIfCategoryExists(spent);
+                return true;
+            }
+
+            return false;
         }
 
         /// <inheritdoc />
@@ -70,5 +98,10 @@ namespace ExpenseManagement.Infrastructure.Persistence.Repositories
             return await _collection.Find(c => c.CodeUser == codeUser 
                                            && c.Description.Contains(description)).FirstOrDefaultAsync();
         }
+
+
+
+
+
     }
 }

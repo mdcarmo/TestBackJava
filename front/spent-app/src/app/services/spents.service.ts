@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Spent } from '../shared/spent';
 
 const baseUrl = 'http://localhost:5226/api/expense-management';
@@ -11,7 +11,6 @@ const baseUrl = 'http://localhost:5226/api/expense-management';
 })
 
 export class SpentsService {
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
   spents: Array<Spent> = [];
 
   constructor(private http: HttpClient, public router: Router) { }
@@ -29,7 +28,6 @@ export class SpentsService {
   }
 
   findByDate(id: any,date: any): Observable<Spent[]> {
-    console.log(date);
     return this.http.get<Spent[]>(`${baseUrl}/filterByDate/${id}?dateFind=${date}`);
   }
 }

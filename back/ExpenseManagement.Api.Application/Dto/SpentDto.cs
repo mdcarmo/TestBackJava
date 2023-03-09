@@ -59,13 +59,16 @@ namespace ExpenseManagement.Api.Application.Dto
         /// <returns>Spent</returns>
         public static Spent FromDto(SpentDto dto)
         {
-            return new Spent(
-                dto.CodeUser,
-                dto.Description,
-                dto.Value,
-                dto.PostedAt,
-                dto.Category
-             );
+            Spent spent = new Spent()
+            {
+                CodeUser = dto.CodeUser,
+                Description = dto.Description,
+                Value = dto.Value,
+                Category = dto.Category,
+                PostedAt = dto.PostedAt
+            };
+
+            return spent;
         }
     }
 }

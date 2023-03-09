@@ -27,6 +27,8 @@ namespace ExpenseManagement.Api.Application.Services
 
             if (string.IsNullOrEmpty(spent.Category))
                 spent.Category = await FindCategoryContentDescription(spent.CodeUser, spent.Description);
+
+            spent.PostedAt = DateTime.Now.Date;
           
             await _repository.AddAsync(spent);
 

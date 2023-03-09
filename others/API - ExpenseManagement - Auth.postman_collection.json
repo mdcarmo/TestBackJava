@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "4e9b467c-31d7-4162-9a32-8d507d847203",
+		"name": "API - ExpenseManagement - Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1001449"
+	},
+	"item": [
+		{
+			"name": "GetTokenUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"john.doe@gmail.com\",\r\n  \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5167/api/expense-management-authentication/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5167",
+					"path": [
+						"api",
+						"expense-management-authentication",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTokenSystem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"empresa-teste@gmail.com\",\r\n  \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5167/api/expense-management-authentication/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5167",
+					"path": [
+						"api",
+						"expense-management-authentication",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
