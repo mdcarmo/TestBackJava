@@ -3,7 +3,6 @@ using ExpenseManagement.Core.Repositories;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Globalization;
-using System.Linq;
 
 namespace ExpenseManagement.Infrastructure.Persistence.Repositories
 {
@@ -29,21 +28,6 @@ namespace ExpenseManagement.Infrastructure.Persistence.Repositories
             
             //verifica se a categoria já existe na coleção  
             await CheckIfCategoryExists(spent);
-        }
-
-        private async Task CheckIfCategoryExists(Spent spent)
-        {
-            if (!string.IsNullOrEmpty(spent.Category))
-            {
-                var categoryDb = await _collectionCategory.Find(c => c.Description.Contains(spent.Category)).FirstOrDefaultAsync();
-                if (categoryDb == null)
-                {
-                    Category category = new Category();
-                    category.Description = spent.Category;
-
-                    await _collectionCategory.InsertOneAsync(category);
-                }
-            }
         }
 
         /// <inheritdoc />
@@ -99,9 +83,19 @@ namespace ExpenseManagement.Infrastructure.Persistence.Repositories
                                            && c.Description.Contains(description)).FirstOrDefaultAsync();
         }
 
+        private async Task CheckIfCategoryExists(Spent spent)
+        {
+            if (!string.IsNullOrEmpty(spent.Category))
+            {
+                var categoryDb = await _collectionCategory.Find(c => c.Description.Contains(spent.Category)).FirstOrDefaultAsync();
+                if (categoryDb == null)
+                {
+                    Category category = new Category();
+                    category.Description = spent.Category;
 
-
-
-
+                    await _collectionCategory.InsertOneAsync(category);
+                }
+            }
+        }
     }
 }

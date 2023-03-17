@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseManagement.Api", "ExpenseManagement.Api\ExpenseManagement.Api.csproj", "{E457F15F-A7F2-47DE-B293-D4ACDCDC4C19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseManagement.Api", "ExpenseManagement.Api\ExpenseManagement.Api.csproj", "{E457F15F-A7F2-47DE-B293-D4ACDCDC4C19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseManagement.Api.Application", "ExpenseManagement.Api.Application\ExpenseManagement.Api.Application.csproj", "{77C6686A-8E28-4BD8-AE6F-D6ED2E1E2D73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseManagement.Api.Application", "ExpenseManagement.Api.Application\ExpenseManagement.Api.Application.csproj", "{77C6686A-8E28-4BD8-AE6F-D6ED2E1E2D73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseManagement.Core", "ExpenseManagement.Core\ExpenseManagement.Core.csproj", "{2888F438-21CA-462D-9A4D-7301727F4676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseManagement.Core", "ExpenseManagement.Core\ExpenseManagement.Core.csproj", "{2888F438-21CA-462D-9A4D-7301727F4676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseManagement.Infrastructure", "ExpenseManagement.Infrastructure\ExpenseManagement.Infrastructure.csproj", "{1CB4A98B-4973-4AF3-896F-69AB3D8293DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseManagement.Infrastructure", "ExpenseManagement.Infrastructure\ExpenseManagement.Infrastructure.csproj", "{1CB4A98B-4973-4AF3-896F-69AB3D8293DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseManagement.Test", "ExpenseManagement.Test\ExpenseManagement.Test.csproj", "{1AB25BC1-3DEB-41F3-8002-64F415C0708A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1CB4A98B-4973-4AF3-896F-69AB3D8293DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CB4A98B-4973-4AF3-896F-69AB3D8293DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CB4A98B-4973-4AF3-896F-69AB3D8293DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB25BC1-3DEB-41F3-8002-64F415C0708A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB25BC1-3DEB-41F3-8002-64F415C0708A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB25BC1-3DEB-41F3-8002-64F415C0708A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB25BC1-3DEB-41F3-8002-64F415C0708A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
