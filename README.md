@@ -63,6 +63,9 @@ Basta abrir o Postman e importar a collection
 ![Alt text](https://github.com/mdcarmo/TestBackJava/blob/master/others/img4.png?raw=true)
 ![Alt text](https://github.com/mdcarmo/TestBackJava/blob/master/others/img5.png?raw=true)
 
+## Testes Unitários
+
+![Alt text](https://github.com/mdcarmo/TestBackJava/blob/master/others/img6.png?raw=true)
 
 # Show me the code
 
